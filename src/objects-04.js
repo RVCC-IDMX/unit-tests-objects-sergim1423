@@ -60,7 +60,8 @@ const response = {
  * example: getEmployeeName(1) // => 'Author'
  */
 function getOneEmployeeName(index) {
-  // write your code here & return value
+  let emps = response.employees[index].name;
+  return emps;
 }
 
 /**
@@ -75,7 +76,7 @@ function getOneEmployeeName(index) {
  * must use the map() array method
  */
 function getEmployeeNames() {
-  // write your code here & return value
+  return response.employees.map((employee) => employee.name);
 }
 
 module.exports = {
