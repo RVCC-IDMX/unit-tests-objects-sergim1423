@@ -62,7 +62,19 @@
  * then use the copied object like a lookup table
  */
 function getColorValue(color) {
-  // write your code here & return value
+  const colorCodes = {
+    black: 0,
+    brown: 1,
+    red: 2,
+    orange: 3,
+    yellow: 4,
+    green: 5,
+    blue: 6,
+    violet: 7,
+    grey: 8,
+    white: 9,
+  };
+  return colorCodes[color];
 }
 
 /**
@@ -79,7 +91,21 @@ function getColorValue(color) {
  * then use the copied object like a lookup table
  */
 function getMultiplierValue(color) {
-  // write your code here & return value
+  const multiplierCodes = {
+    black: 1,
+    brown: 10,
+    red: 100,
+    orange: 1000,
+    yellow: 10000,
+    green: 100000,
+    blue: 1000000,
+    violet: 10000000,
+    grey: 100000000,
+    white: 1000000000,
+    gold: 0.1,
+    silver: 0.01
+  };
+  return multiplierCodes[color]
 }
 
 /**
@@ -106,7 +132,17 @@ function getMultiplierValue(color) {
  *
  */
 function getThreeBandValue(bands) {
-  // write your code here & return value
+  let tenths = getColorValue(bands.color1);
+  let ones = getColorValue(bands.color2);
+
+  let color1 = tenths.toFixed();
+  let color2 = ones.toFixed();
+
+  let add = color2 + color1;
+  let multiplier = getMultiplierValue(bands.multiplier);
+
+  let product = (color1 + color2) * multiplier;
+  return product;
 }
 
 /**
@@ -131,7 +167,21 @@ function getThreeBandValue(bands) {
  *
  */
 function formatNumber(val) {
-  // write your code here & return value
+  if (val >= 1000 && val < 1000000) {
+    val = val / 1000;
+    return val + 'k';
+  }
+  else if (val >= 1000000 && val < 1000000000) {
+    val = val / 1000000;
+    return val + 'M';
+  }
+  else if (val >= 1000000000) {
+    val = val / 1000000000;
+    return val + 'G';
+  }
+  else {
+    return val.toFixed();
+  }
 }
 
 /**
@@ -150,7 +200,18 @@ function formatNumber(val) {
  * example: 'green' => '±0.5%'
  */
 function getTolerance(color) {
-  // write your code here & return value
+  const toleranceCodes = {
+    brown: 1,
+    red: 2,
+    green: .5,
+    blue: .25,
+    violet: .1,
+    grey: .05,
+    gold: 5,
+    silver: 10
+  };
+  let stringF = toleranceCodes[color];
+  return '±' + stringF + '%';
 }
 
 /**
@@ -182,7 +243,11 @@ function getTolerance(color) {
  * must use functions in this file to build the string using a template literal
  */
 function getResistorOhms(bands) {
-  // write your code here & return value
+  let threeBands = getThreeBandValue(bands);
+  let prettyNumber = formatNumber(threeBands);
+  let tolerance = getTolerance(bands.tolerance);
+  let resistance = 'Resistor value: ' + prettyNumber + ' Ohms ' + tolerance;
+  return resistance;
 }
 
 module.exports = {
