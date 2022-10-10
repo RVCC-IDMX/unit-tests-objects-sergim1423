@@ -24,7 +24,13 @@
  * example: getVolumeOfBox({length: 2.4, width: 3, height: 1.8}) // => 12.96
  */
 function getVolumeOfBox(box) {
-  // write your code here & return value
+  let volume = (box.length * box.width * box.height);
+  if (volume % 1 === 0) {
+    return volume;
+  }
+  else {
+    return parseFloat(volume.toFixed(2));
+  }
 }
 
 module.exports = {
